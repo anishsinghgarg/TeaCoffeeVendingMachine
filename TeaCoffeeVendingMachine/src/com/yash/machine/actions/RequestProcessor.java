@@ -66,7 +66,7 @@ public class RequestProcessor {
 					slave_map = adminRequest.adminRequests(master_map);
 					status_code = (int) slave_map.get("status_code");
 					mcContainers = (MachineContainers) slave_map.get("container");
-				} while (status_code == -2 || status_code == -1 || status_code == 0);
+				} while (status_code == -2 || status_code == -1 || status_code == 0 || status_code == 1);
 			}
 
 			if (user_type.equals("Vendor")) {

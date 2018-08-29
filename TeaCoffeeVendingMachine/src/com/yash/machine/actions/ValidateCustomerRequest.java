@@ -96,17 +96,20 @@ public class ValidateCustomerRequest implements DrinkValidation {
 			} else {
 				if (drink_id == 0) {
 					System.out.println("Customer want to Exit :-(");
+					master_map.put("underflow", "N");
 					status_code = -99;
 				} else {
 					System.out.println("The value you have entered is invalid. Please try again !!!");
+					master_map.put("underflow", "N");
 					status_code = -2;
 				}
 
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			System.out.println("Something happened wrong. Please try again !!!");
 			status_code = 0;
+			master_map.put("underflow", "N");
 		}
 		master_map.put("status_code", status_code);
 		return master_map;
