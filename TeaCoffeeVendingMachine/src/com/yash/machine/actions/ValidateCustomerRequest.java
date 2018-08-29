@@ -18,6 +18,7 @@ public class ValidateCustomerRequest implements DrinkValidation {
 	public HashMap<String, Object> customerRequests(HashMap<String, Object> main_map) {
 		int drink_id = 0;
 		int quantity = 0;
+		String input_amount;
 		int status_code = 0;
 		// -99 = Exit
 		// 0 = Error
@@ -35,8 +36,24 @@ public class ValidateCustomerRequest implements DrinkValidation {
 			Drinks drink = new Drinks();
 
 			if (drink.getDrinks().containsKey(drink_id)) {
-				System.out.println("No of quantity ::");
+				int action_status = 0;
+
+				System.out.println("Enter No of quantity ::");
 				quantity = input.nextInt();
+				do {
+					Pricing pricing = new Pricing();
+					Double drink_price = pricing.getDrinksPricing().get(drink_id);
+					drink_price = drink_price * quantity;
+					System.out.println("Pay Rs " + drink_price + "::");
+					input_amount = input.next();
+					// System.out.println("Rs " + input_amount + "::"+Double.compare(drink_price,
+					// Double.valueOf(input_amount)));
+					if (Double.compare(drink_price, Double.valueOf(input_amount)) != 0) {
+						System.out.println("Entered Amount is not Sufficient!!");
+					} else {
+						action_status = 1;
+					}
+				} while (action_status == 0);
 				System.out.println(
 						"Customer Requested " + quantity + " cup of " + drink.getDrinks().get(drink_id) + " Drink.");
 				if (quantity > 0) {
